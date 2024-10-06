@@ -1,0 +1,22 @@
+version: '3.9'
+services:
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  backend:
+    build: .
+    ports:
+      - "4000:4000"
+    depends_on:
+      - mongo
+    environment:
+      # - DATABASE_URL=mongodb://mongo:27017/myDatabase
+      - mongodb+srv://raobadalyadav11:Bkbadal33@clustercode.f5rduf0.mongodb.net/?retryWrites=true&w=majority&appName=Clustercode/graphsql
+    command: npm run dev
+
+volumes:
+  mongo-data:
